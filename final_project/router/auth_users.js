@@ -52,7 +52,7 @@ regd_users.put("/auth/review/:isbn", (req, res) => {
     const review = req.query.review;
     const username = req.session.authorization['username'];
     if(!books[isbn]) {
-        return res.status(404).json({message: "No book exists for given ISBN ${isbn}"});
+        return res.status(404).json({message: "No book exists for given ISBN"});
     }
     books[isbn]["reviews"][username] = review;
     return res.status(200).json({message: "Review successfully added"});
@@ -63,7 +63,7 @@ regd_users.delete("/auth/review/:isbn", (req, res) => {
     const isbn = req.params.isbn;
     const username = req.session.authorization['username'];
     if(!books[isbn]) {
-        return res.status(404).json({message: "No book exists for given ISBN ${isbn}"});
+        return res.status(404).json({message: "No book exists for given ISBN"});
     }
     if (!books[isbn]["reviews"][username]) {
         return res.status(404).json({message: "No review to delete"});
